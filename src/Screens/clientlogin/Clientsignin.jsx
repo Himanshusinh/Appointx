@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Inputbox from './Inputbox';
 import { useNavigate } from 'react-router-dom';
 // Firebase imports
