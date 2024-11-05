@@ -6,19 +6,17 @@ import Phonenumber from './instance/Phonenumber';
 import Options from './instance/Options';
 import LargeInput from './instance/LargeInput';
 import UploadDocuments from './instance/UploadDocuments';
-import { db, storage } from '../../firebase/firebase.js'; // Import Firebase Storage
+import { db } from '../../firebase/firebase.js';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Import necessary storage functions
-import { useNavigate } from 'react-router-dom';
 
 const RegisterInput = () => {
-    const navigate = useNavigate();
   const { uid } = useParams(); // Get UID from URL parameters
 
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [companyName, setCompanyName] = useState('');
   const [companyEmail, setCompanyEmail] = useState('');
+
   const [phonenumber, setPhonenumber] = useState('');
   const [franchise, setFranchise] = useState('');
   const [businessDescription, setBusinessDescription] = useState('');
@@ -26,7 +24,7 @@ const RegisterInput = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [license, setLicense] = useState(null);
-  const [selectedExperience, setSelectedExperience] = useState(null);
+  const [selectedExperience, setSelectedExperience] = useState(null); // State to track selected Box
 
   const handleDocumentUpload = (type) => (file) => {
     if (type === 'profilePhoto') {
@@ -41,12 +39,6 @@ const RegisterInput = () => {
 
   const experienceRanges = ['0<0', '1<2', '3<4', '5>..'];
 
-  const handleFileUpload = async (file, uid, type) => {
-    const storageRef = ref(storage, `vendor_documents/${uid}/${type}`);
-    await uploadBytes(storageRef, file);
-    return await getDownloadURL(storageRef);
-  };
-
   const handleRegisterButton = async () => {
     if (!termsAccepted) {
       alert('You must agree to the terms and conditions to sign up.');
@@ -59,9 +51,6 @@ const RegisterInput = () => {
     }
 
     try {
-      const profilePhotoURL = await handleFileUpload(profilePhoto, uid, 'profilePhoto');
-      const licenseURL = license ? await handleFileUpload(license, uid, 'license') : null;
-
       const vendorRef = doc(collection(db, 'VendorDetails'), uid); // Use UID for document ID
       await setDoc(vendorRef, {
         firstname,
@@ -72,24 +61,19 @@ const RegisterInput = () => {
         franchise,
         description: businessDescription,
         companyaddress: companyAddress,
-        profilePhoto: profilePhotoURL, // Store file URL
-        license: licenseURL, // Store file URL if exists
+        profilePhoto: profilePhoto ? profilePhoto.name : null, // Store file name or path
+        license: license ? license.name : null, // Store file name or path
         experience: selectedExperience !== null ? experienceRanges[selectedExperience] : null, // Store selected experience
       });
-
       alert('Data Uploaded Successfully');
-      navigate('/');
     } catch (err) {
       console.error('Error uploading data:', err);
-      alert('Failed to upload data. Please try again.');
     }
   };
 
   const handleBoxClick = (index) => {
     setSelectedExperience(index); // Set the selected experience
   };
-
- 
 
   return (
     <>
@@ -176,7 +160,7 @@ const RegisterInput = () => {
             <UploadDocuments 
               title="Upload Profile Photo" 
               isRequired={true} 
-              maxFileSizeMB={10}  // Limit to 2 MB
+              maxFileSizeMB={2}  // Limit to 2 MB
               onUpload={handleDocumentUpload('profilePhoto')}
             />
             <UploadDocuments 

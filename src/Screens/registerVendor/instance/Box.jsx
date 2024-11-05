@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
 
-const Box = ({range}) => {
+const Box = ({ range, isSelected, onClick }) => {
   return (
-    <div>
-        <div className='w-14 h-12 border-2 flex justify-items-center align-center p-3 text-RegisterTitle'>{range}</div>
+    <div
+      onClick={onClick}
+      className={`w-14 h-10 flex items-center justify-center cursor-pointer border-2 ${
+        isSelected ? 'bg-blue-500 text-white' : 'bg-white'
+      } border-gray-300 rounded`}
+    >
+      {range}
     </div>
-  )
-}
+  );
+};
 
-export default Box
+export default Box;

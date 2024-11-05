@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { SearchIcon } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
-
 function Navbar() {
   const navigate = useNavigate();
   const handleRegisterButton = () => {

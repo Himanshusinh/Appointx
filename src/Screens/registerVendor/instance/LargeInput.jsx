@@ -8,7 +8,7 @@ const LargeInput = ({title, placeholder,handellargeinput}) => {
     {/* <span><img className='' src="public/questionmark.svg" /></span> */}
     </div>
     
-    <textarea className='w-[625px] h-20  border-2' type="text" placeholder={placeholder} onChange={handellargeinput} />
+    <textarea className='w-[625px] h-28  border-2' type="text" placeholder={placeholder} onChange={handellargeinput} />
   </div>
   )
 }
