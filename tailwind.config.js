@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import tailwindcssAnimate from "tailwindcss-animate";
+
+export default {
   darkMode: ["class"],
   content: [
     './pages/**/*.{js,jsx}',
@@ -17,22 +18,27 @@ module.exports = {
       },
     },
     extend: {
-      fontFamily : {
-        Montserrat : ["Montserrat","sans-serif"]
+      fontFamily: {
+        Montserrat: ["Montserrat", "sans-serif"],
+        OpenSans: ["Open Sans", "sans-serif"],
       },
-      screens:{
-        xs:'300px'
-      }
-      ,
+      screens: {
+        xs: '300px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+      },
       colors: {
-        primarytext:"#272727",
-        serviceText:"#5F718C",
-        RegisterTitle : "#333333",
-        inputbackground : "D4D7E3",
-        maintheme:"#0058E5",
-        button : "#0058E5",
-        silver : "#959CB6",
-        signinwithgoogle : "#EAEAEA",
+        primarytext: "#272727",
+        serviceText: "#5F718C",
+        RegisterTitle: "#333333",
+        inputbackground: "D4D7E3",
+        maintheme: "#0058E5",
+        button: "#0058E5",
+        silver: "#959CB6",
+        signinwithgoogle: "#EAEAEA",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -88,5 +94,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
+  plugins: [tailwindcssAnimate],
+};
