@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Inputbox from './Inputbox';
 // Firebase imports
 import { db, auth, provider } from '../../firebase/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, signInWithPopup, onAuthStateChanged, reload } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
+import {  motion } from 'framer-motion';
+
 
 const ClientRegister = () => {
   const navigate = useNavigate();
@@ -161,7 +163,11 @@ const ClientRegister = () => {
   }, [waitingForVerification]);
 
   return (
-    <div>
+    <motion.div 
+    intial= {{width : 0}}
+     animate ={{width : "100vw"}}
+     exit = {{x: "-100vw", transition:{duration : 0.2}}}
+    >
       <div>
         <img
           src="/Selectionscreen/Logo.svg"
@@ -249,7 +255,7 @@ const ClientRegister = () => {
       <div className='flex justify-center mt-14'>
         <p className='text-silver'>© 2024 ALL RIGHTS RESERVED</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

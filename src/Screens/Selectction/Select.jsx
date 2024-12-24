@@ -1,5 +1,6 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Select = () => {
     const navigate = useNavigate();
@@ -12,7 +13,10 @@ const Select = () => {
 
 
   return (
-    <div>
+    <motion.div
+    intial= {{width : 0}}
+     animate ={{width : "100vw"}}
+     exit = {{x: "100vw", transition:{duration : 0.190}}}>
       {/* <div>
         <img src="public/Selectionscreen/Logo.svg" alt="" />
       </div> */}
@@ -36,7 +40,7 @@ const Select = () => {
         </div>
       </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

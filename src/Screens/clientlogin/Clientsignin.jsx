@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { db, provider, auth } from '../../firebase/firebase.js';
 import { signInWithPopup, sendPasswordResetEmail } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore';
+import { motion } from 'framer-motion';
 
 const Clientsignin = () => {
   const navigate = useNavigate();
@@ -81,7 +82,11 @@ const Clientsignin = () => {
   };
 
   return (
-    <div>
+    <motion.div
+    intial= {{width : 0}}
+     animate ={{width : "100vw"}}
+     exit = {{x: "-100vw", transition:{duration : 0.2}}}
+     >
       <div>
         <img 
           src="/Selectionscreen/Logo.svg" 
@@ -164,7 +169,7 @@ const Clientsignin = () => {
       <div className='flex justify-center mt-14'>
         <p className='text-silver'>© 2024 ALL RIGHTS RESERVED</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

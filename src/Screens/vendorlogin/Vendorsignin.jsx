@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Inputbox from './Inputbox';
 // Firebase imports
 import { db, provider, auth } from '../../firebase/firebase.js';
 import { signInWithPopup } from 'firebase/auth';
 import { collection, getDocs } from 'firebase/firestore';
+import { motion } from 'framer-motion';
 
 const Vendorsignin = () => {
   const navigate = useNavigate();
@@ -64,7 +65,10 @@ const Vendorsignin = () => {
   };
 
   return (
-    <div>
+    <motion.div
+    intial= {{width : 0}}
+     animate ={{width : "100vw"}}
+     exit = {{x: "100vw", transition:{duration : 0.2}}}>
       <div>
         <img 
           src="/Selectionscreen/Logo.svg" 
@@ -142,7 +146,7 @@ const Vendorsignin = () => {
       <div className='flex justify-center mt-14'>
         <p className='text-silver'>© 2024 ALL RIGHTS RESERVED</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

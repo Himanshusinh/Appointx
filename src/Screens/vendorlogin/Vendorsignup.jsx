@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Inputbox from './Inputbox';
 import { db, auth, provider } from '../../firebase/firebase';
 import { createUserWithEmailAndPassword, sendEmailVerification, reload, signInWithPopup } from 'firebase/auth';
 import { collection, addDoc } from 'firebase/firestore';
+import { motion } from 'framer-motion';
 
 const Vendorsignup = () => {
   const navigate = useNavigate();
@@ -149,7 +150,10 @@ const Vendorsignup = () => {
   }
 
   return (
-    <div>
+    <motion.div
+    intial= {{width : 0}}
+     animate ={{width : "100vw"}}
+     exit = {{x: "-100vw", transition:{duration : 0.2}}}>
       <div>
         <img
           src="/Selectionscreen/Logo.svg"
@@ -233,7 +237,7 @@ const Vendorsignup = () => {
       <div className='flex justify-center mt-14'>
         <p className='text-gray-500'>© 2024 ALL RIGHTS RESERVED</p>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
